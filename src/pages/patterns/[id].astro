@@ -1,0 +1,19 @@
+---
+import PatternLayout from '@/layouts/PatternLayout.astro';
+import { patterns, getPatternById } from '@/data/patterns';
+import PatternContent from '@/components/patterns/PatternContent.vue';
+
+// 生成所有模式页面的静态路径
+export function getStaticPaths() {
+  return patterns.map(pattern => ({
+    params: { id: pattern.id },
+    props: { pattern },
+  }));
+}
+
+const { pattern } = Astro.props;
+---
+
+<PatternLayout pattern={pattern}>
+  <PatternContent pattern={pattern} client:load />
+</PatternLayout>
