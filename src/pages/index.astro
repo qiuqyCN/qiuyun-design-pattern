@@ -1,26 +1,35 @@
 ---
-import '../styles/global.css';
-// Component Imports
-import Button from '../components/Button.astro';
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+import Layout from '@/layouts/main.astro';
+import HeroSection from '@/components/home/HeroSection.vue';
+import StatsSection from '@/components/home/StatsSection.vue';
+import CategorySection from '@/components/home/CategorySection.vue';
+import PopularSection from '@/components/home/PopularSection.vue';
+import RecommendationSection from '@/components/home/RecommendationSection.vue';
+import PathSection from '@/components/home/PathSection.vue';
+import FeaturesSection from '@/components/home/FeaturesSection.vue';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro + TailwindCSS</title>
-	</head>
-
-	<body>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
-	</body>
-</html>
+<Layout title="秋云设计模式 - 23种经典设计模式学习">
+  <main class="min-h-screen">
+    <!-- Hero 区域 -->
+    <HeroSection client:load />
+    
+    <!-- 学习概览 -->
+    <StatsSection client:visible />
+    
+    <!-- 三种分类 -->
+    <CategorySection client:visible />
+    
+    <!-- 热门模式 -->
+    <PopularSection client:visible />
+    
+    <!-- 今日推荐 -->
+    <RecommendationSection client:visible />
+    
+    <!-- 学习路径 -->
+    <PathSection client:visible />
+    
+    <!-- 特色功能 -->
+    <FeaturesSection client:visible />
+  </main>
+</Layout>
