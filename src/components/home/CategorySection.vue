@@ -1,104 +1,46 @@
 <template>
-  <section class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50">
+  <section id="patterns" class="py-24 px-6 md:px-12 lg:px-24 border-t border-slate-100 dark:border-slate-800">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">
-          三种设计模式分类
-        </h2>
-        <p class="text-slate-600 dark:text-slate-400">
-          根据 GoF 设计模式，分为创建型、结构型和行为型三大类
-        </p>
+      <!-- 标题 -->
+      <div class="mb-16">
+        <span class="text-xs tracking-widest text-slate-400 uppercase block mb-4">Categories</span>
+        <h2 class="text-2xl md:text-3xl font-light text-slate-900 dark:text-white">设计模式分类</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div 
-          v-for="category in categories" 
+      <!-- 分类列表 -->
+      <div class="space-y-0">
+        <a 
+          v-for="(category, index) in categories" 
           :key="category.id"
-          class="group relative bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
-          @click="navigateToCategory(category.id)"
+          :href="`/patterns?category=${category.id}`"
+          class="group flex items-center justify-between py-6 border-b border-slate-100 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
         >
-          <!-- 图标 -->
-          <div 
-            class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
-            :style="{ backgroundColor: category.color + '15' }"
-          >
-            <component 
-              :is="getCategoryIcon(category.icon)" 
-              class="w-8 h-8"
-              :style="{ color: category.color }"
-            />
+          <div class="flex items-baseline gap-6 md:gap-12">
+            <span class="text-xs text-slate-400 w-6">0{{ index + 1 }}</span>
+            <div>
+              <h3 class="text-lg md:text-xl font-normal text-slate-900 dark:text-white group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
+                {{ category.name }}
+              </h3>
+              <p class="text-sm text-slate-500 mt-1 hidden md:block">{{ category.description }}</p>
+            </div>
           </div>
-
-          <!-- 内容 -->
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">
-            {{ category.name }}
-          </h3>
-          <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">
-            {{ category.nameEn }}
-          </p>
-          <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">
-            {{ category.description }}
-          </p>
-
-          <!-- 进度 -->
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-sm text-slate-500">
-              {{ getLearnedCount(category.id) }}/{{ category.count }} 已学
-            </span>
-            <span 
-              class="text-sm font-semibold"
-              :style="{ color: category.color }"
+          <div class="flex items-center gap-4">
+            <span class="text-sm text-slate-400">{{ category.count }} 种模式</span>
+            <svg 
+              class="w-5 h-5 text-slate-300 group-hover:text-slate-600 dark:group-hover:text-slate-400 transition-colors transform group-hover:translate-x-1" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
             >
-              {{ Math.round((getLearnedCount(category.id) / category.count) * 100) }}%
-            </span>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
           </div>
-
-          <!-- 进度条 -->
-          <div class="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden mb-6">
-            <div 
-              class="h-full rounded-full transition-all duration-500"
-              :style="{ 
-                width: `${(getLearnedCount(category.id) / category.count) * 100}%`,
-                backgroundColor: category.color 
-              }"
-            ></div>
-          </div>
-
-          <!-- 按钮 -->
-          <div class="flex items-center text-sm font-medium" :style="{ color: category.color }">
-            探索 {{ category.name }}
-            <ArrowRightIcon class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Building2, Puzzle, Theater, ArrowRight } from 'lucide-vue-next';
 import { categories } from '@/data/categories';
-import { useLearningStats } from '@/composables/useLearningStats';
-
-const { stats } = useLearningStats();
-
-const iconMap: Record<string, any> = {
-  Building2: Building2,
-  Puzzle: Puzzle,
-  Theater: Theater,
-};
-
-function getCategoryIcon(iconName: string) {
-  return iconMap[iconName] || Building2;
-}
-
-function getLearnedCount(categoryId: string) {
-  return stats.value.categoryProgress[categoryId as keyof typeof stats.value.categoryProgress]?.learned || 0;
-}
-
-function navigateToCategory(categoryId: string) {
-  window.location.href = `/patterns?category=${categoryId}`;
-}
-
-const ArrowRightIcon = ArrowRight;
 </script>
