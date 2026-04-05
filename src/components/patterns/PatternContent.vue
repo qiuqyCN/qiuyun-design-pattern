@@ -80,19 +80,8 @@
         </button>
       </div>
 
-      <!-- 代码展示 -->
-      <div class="bg-slate-900 rounded-lg overflow-hidden">
-        <div class="flex items-center justify-between px-4 py-2 bg-slate-800">
-          <span class="text-xs text-slate-400">{{ currentLanguage }}</span>
-          <button 
-            @click="copyCode"
-            class="text-xs text-slate-400 hover:text-white transition-colors"
-          >
-            {{ copied ? '已复制' : '复制' }}
-          </button>
-        </div>
-        <pre class="p-4 text-sm text-slate-300 overflow-x-auto font-mono">{{ currentCode }}</pre>
-      </div>
+      <!-- 代码展示 - 使用 CodeBlock 组件 -->
+      <CodeBlock :code="currentCode" :language="currentLanguage" />
     </section>
 
     <!-- 实际应用 -->
@@ -102,9 +91,8 @@
         <div v-for="(example, index) in pattern.realWorldExamples" :key="index" class="border-l-2 border-slate-200 dark:border-slate-700 pl-6">
           <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-2">{{ example.title }}</h3>
           <p class="text-slate-600 dark:text-slate-400 mb-3">{{ example.description }}</p>
-          <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-lg">
-            <div class="text-xs text-slate-400 mb-2">{{ example.source }}</div>
-            <pre class="text-sm text-slate-700 dark:text-slate-300 font-mono">{{ example.codeSnippet }}</pre>
+          <div v-if="example.codeSnippet" class="mt-4">
+            <CodeBlock :code="example.codeSnippet" language="java" />
           </div>
         </div>
       </div>
@@ -158,6 +146,7 @@
 import { ref, computed } from 'vue';
 import type { DesignPattern } from '@/types/pattern';
 import { patternNames } from '@/data/patterns';
+import CodeBlock from './CodeBlock.vue';
 
 const props = defineProps<{
   pattern: DesignPattern;
@@ -172,7 +161,6 @@ const languages = [
 ];
 
 const currentLanguage = ref('typescript');
-const copied = ref(false);
 
 const currentCode = computed(() => {
   const impl = props.pattern.implementation;
@@ -185,12 +173,6 @@ const currentCode = computed(() => {
     default: return impl.typescript;
   }
 });
-
-function copyCode() {
-  navigator.clipboard.writeText(currentCode.value);
-  copied.value = true;
-  setTimeout(() => copied.value = false, 2000);
-}
 
 // 测验状态
 const selectedAnswers = ref<Record<string, number>>({});

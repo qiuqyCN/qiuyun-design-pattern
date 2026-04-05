@@ -21,7 +21,7 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
   </head>
   <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
     <!-- 导航 -->
@@ -31,13 +31,21 @@ const {
         <div class="flex items-center gap-8">
           <a href="/patterns" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">模式</a>
           <a href="/statistics" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">统计</a>
+          <slot name="nav-extra" />
           <button 
             id="theme-toggle"
-            class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
+            class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
             aria-label="切换主题"
           >
-            <span class="dark:hidden">暗色</span>
-            <span class="hidden dark:inline">亮色</span>
+            <!-- 太阳图标 - 亮色模式时显示 -->
+            <svg class="dark:hidden w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
+              <path stroke-width="1.5" stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <!-- 月亮图标 - 暗色模式时显示 -->
+            <svg class="hidden dark:block w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-width="1.5" stroke-linecap="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
           </button>
         </div>
       </div>
