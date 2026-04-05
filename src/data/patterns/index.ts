@@ -1,10 +1,54 @@
 import type { DesignPattern } from '@/types/pattern';
 import { singletonPattern } from './singleton';
+import { factoryMethodPattern } from './factory-method';
+import { abstractFactoryPattern } from './abstract-factory';
+import { builderPattern } from './builder';
+import { prototypePattern } from './prototype';
+import { adapterPattern } from './adapter';
+import { bridgePattern } from './bridge';
+import { compositePattern } from './composite';
+import { decoratorPattern } from './decorator';
+import { facadePattern } from './facade';
+import { flyweightPattern } from './flyweight';
+import { proxyPattern } from './proxy';
+import { chainOfResponsibilityPattern } from './chain-of-responsibility';
+import { commandPattern } from './command';
+import { iteratorPattern } from './iterator';
+import { mediatorPattern } from './mediator';
+import { mementoPattern } from './memento';
+import { observerPattern } from './observer';
+import { statePattern } from './state';
+import { strategyPattern } from './strategy';
+import { templateMethodPattern } from './template-method';
+import { visitorPattern } from './visitor';
 
 // 所有设计模式数据
 export const patterns: DesignPattern[] = [
+  // 创建型模式 (5种)
   singletonPattern,
-  // 后续添加更多模式...
+  factoryMethodPattern,
+  abstractFactoryPattern,
+  builderPattern,
+  prototypePattern,
+  // 结构型模式 (7种)
+  adapterPattern,
+  bridgePattern,
+  compositePattern,
+  decoratorPattern,
+  facadePattern,
+  flyweightPattern,
+  proxyPattern,
+  // 行为型模式 (11种)
+  chainOfResponsibilityPattern,
+  commandPattern,
+  iteratorPattern,
+  mediatorPattern,
+  mementoPattern,
+  observerPattern,
+  statePattern,
+  strategyPattern,
+  templateMethodPattern,
+  visitorPattern,
 ];
 
 // 按分类获取模式
