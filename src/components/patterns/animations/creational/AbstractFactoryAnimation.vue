@@ -49,8 +49,8 @@
           class="w-36 h-14 rounded-lg flex items-center justify-center text-sm font-medium transition-all duration-500 border-2"
           :class="selectedFamily ? 
             (selectedFamily === 'Modern' ? 
-              'bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 text-blue-700 border-blue-300 shadow-sm' : 
-              'bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-900/30 dark:to-amber-800/20 text-amber-700 border-amber-300 shadow-sm'
+              'bg-linear-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 text-blue-700 border-blue-300 shadow-sm' : 
+              'bg-linear-to-r from-amber-50 to-amber-100 dark:from-amber-900/30 dark:to-amber-800/20 text-amber-700 border-amber-300 shadow-sm'
             ) : 'bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200'"
           :style="{ transitionDelay: `${index * 150}ms` }"
         >

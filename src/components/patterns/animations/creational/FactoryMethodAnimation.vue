@@ -63,7 +63,7 @@
         >
           <div 
             class="w-32 h-24 rounded-xl flex flex-col items-center justify-center shadow-lg"
-            :class="selectedProduct === 'A' ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/30 border-2 border-blue-400' : 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/40 dark:to-purple-800/30 border-2 border-purple-400'"
+            :class="selectedProduct === 'A' ? 'bg-linear-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/30 border-2 border-blue-400' : 'bg-linear-to-br from-purple-100 to-purple-200 dark:from-purple-900/40 dark:to-purple-800/30 border-2 border-purple-400'"
           >
             <span class="text-2xl mb-1">{{ selectedProduct === 'A' ? '📦' : '🎁' }}</span>
             <span class="text-sm font-bold" :class="selectedProduct === 'A' ? 'text-blue-700' : 'text-purple-700'">

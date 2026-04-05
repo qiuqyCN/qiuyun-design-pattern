@@ -32,7 +32,7 @@
           :key="step"
           class="w-44 h-12 rounded-lg flex items-center justify-center text-sm font-medium transition-all duration-500 border-2"
           :class="buildProgress > index ? 
-            'bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 text-green-700 border-green-400 shadow-sm' : 
+            'bg-linear-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 text-green-700 border-green-400 shadow-sm' : 
             'bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200'"
         >
           <span v-if="buildProgress > index" class="mr-2 text-green-500">✓</span>
@@ -59,7 +59,7 @@
         <div 
           class="w-36 h-36 rounded-xl flex flex-col items-center justify-center transition-all duration-700 border-3"
           :class="buildProgress >= 3 ? 
-            'bg-gradient-to-br from-green-400 to-green-500 text-white border-green-600 scale-100 shadow-xl' : 
+            'bg-linear-to-br from-green-400 to-green-500 text-white border-green-600 scale-100 shadow-xl' : 
             'bg-slate-200 dark:bg-slate-700 text-slate-400 border-slate-300 scale-90'"
         >
           <div class="text-4xl mb-2 transition-all duration-500" :class="buildProgress >= 3 ? 'scale-110' : 'scale-100'">

@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = '关于 - 秋云设计模式';
+const description = '关于秋云设计模式网站的介绍';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-40 pb-20 px-6 md:px-12 lg:px-24">
+    <div class="max-w-6xl mx-auto">
+      <!-- 页面标题 -->
+      <div class="mb-16 text-center">
+        <h1 class="text-3xl font-light tracking-tight mb-4">关于</h1>
+        <p class="text-slate-500 dark:text-slate-400">秋云设计模式 - 让设计模式学习更简单</p>
+      </div>
+
+      <!-- 项目介绍 -->
+      <div class="mb-16">
+        <h2 class="text-xl font-medium mb-6">项目简介</h2>
+        <div class="prose dark:prose-invert max-w-none">
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            秋云设计模式是一个专注于设计模式学习的开源项目。我们致力于通过直观的交互式动画、
+            清晰的代码示例和丰富的实践案例，帮助开发者深入理解23种经典GoF设计模式。
+          </p>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            无论你是刚入门的编程新手，还是希望提升架构设计能力的资深开发者，
+            这里都有适合你的学习资源。
+          </p>
+        </div>
+      </div>
+
+      <!-- 核心特性 -->
+      <div class="mb-16">
+        <h2 class="text-xl font-medium mb-6">核心特性</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-100 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-medium mb-2">交互式动画</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              每个设计模式都配有精心设计的交互式动画，直观展示模式的工作原理
+            </p>
+          </div>
+
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-100 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+              </svg>
+            </div>
+            <h3 class="font-medium mb-2">多语言代码</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              提供Java、TypeScript、Go、Python、C++五种语言的实现代码
+            </p>
+          </div>
+
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-100 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <h3 class="font-medium mb-2">学习统计</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              追踪学习进度，记录连续学习天数，让学习更有成就感
+            </p>
+          </div>
+
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-100 dark:border-slate-800">
+            <div class="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <h3 class="font-medium mb-2">响应式设计</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+              完美适配桌面和移动设备，随时随地都能学习
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 技术栈 -->
+      <div class="mb-16">
+        <h2 class="text-xl font-medium mb-6">技术栈</h2>
+        <div class="flex flex-wrap gap-3">
+          {[
+            { name: 'Astro', desc: '静态站点生成' },
+            { name: 'Vue 3', desc: '交互组件' },
+            { name: 'Tailwind CSS', desc: '样式框架' },
+            { name: 'shadcn-vue', desc: 'UI组件库' },
+            { name: 'TypeScript', desc: '类型安全' },
+            { name: 'Mermaid', desc: 'UML图表' }
+          ].map(tech => (
+            <div class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg">
+              <span class="font-medium text-sm">{tech.name}</span>
+              <span class="text-xs text-slate-400 ml-2">{tech.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 开源信息 -->
+      <div class="mb-16">
+        <h2 class="text-xl font-medium mb-6">开源信息</h2>
+        <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-100 dark:border-slate-800">
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+            本项目采用 MIT 开源协议，欢迎提交 Issue 和 Pull Request。
+            如果你觉得这个项目对你有帮助，欢迎给我们在 GitHub 上点个 Star ⭐
+          </p>
+          <div class="flex items-center gap-4">
+            <a 
+              href="https://github.com/qiuqyCN/qiuyun-design-pattern" 
+              target="_blank"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:opacity-80 transition-opacity"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+            <span class="text-sm text-slate-400">MIT License</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 致谢 -->
+      <div class="mb-16">
+        <h2 class="text-xl font-medium mb-6">致谢</h2>
+        <div class="prose dark:prose-invert max-w-none">
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            感谢 Gang of Four (GoF) 编写的《设计模式：可复用面向对象软件的基础》，
+            这本书奠定了软件设计模式的基础。也感谢所有开源社区的贡献者，
+            是你们让这个项目成为可能。
+          </p>
+        </div>
+      </div>
+
+      <!-- 联系我们 -->
+      <div>
+        <h2 class="text-xl font-medium mb-6">联系我们</h2>
+        <div class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+          <p class="text-slate-600 dark:text-slate-400 mb-4">
+            有任何建议或问题？欢迎通过以下方式联系我们：
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="mailto:97208294@qq.com" class="text-sm text-blue-600 hover:underline">
+              97208294@qq.com
+            </a>
+            <span class="text-slate-300">|</span>
+            <a href="https://github.com/qiuqyCN/qiuyun-design-pattern/issues" target="_blank" class="text-sm text-blue-600 hover:underline">
+              GitHub Issues
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

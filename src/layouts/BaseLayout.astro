@@ -29,6 +29,7 @@ const {
       <div class="max-w-6xl mx-auto flex items-center justify-between">
         <a href="/" class="text-sm font-medium tracking-wide">秋云设计模式</a>
         <div class="flex items-center gap-8">
+          <a href="/" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">首页</a>
           <a href="/patterns" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">模式</a>
           <a href="/statistics" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">统计</a>
           <slot name="nav-extra" />
@@ -61,8 +62,18 @@ const {
       <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <span class="text-sm text-slate-400">秋云设计模式</span>
         <div class="flex items-center gap-6">
-          <a href="https://github.com" target="_blank" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">GitHub</a>
           <a href="/about" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">关于</a>
+          <a href="https://github.com/qiuqyCN/qiuyun-design-pattern" target="_blank" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">GitHub</a>
+          <div class="relative group">
+            <span class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer">微信公众号</span>
+            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 p-3">
+                <img src="/gzh.jpg" alt="微信公众号" class="max-w-80 max-h-96 w-auto h-auto object-contain rounded" />
+                <div class="text-xs text-center text-slate-500 mt-2">扫码关注</div>
+              </div>
+              <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-white dark:border-t-slate-800"></div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -7,7 +7,7 @@
       <div class="flex flex-col items-center">
         <div 
           class="w-36 h-36 rounded-xl flex flex-col items-center justify-center border-3 transition-all duration-500 cursor-pointer"
-          :class="originalObject ? 'border-blue-500 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 shadow-lg' : 'border-slate-300 border-dashed bg-slate-50 dark:bg-slate-800 hover:border-slate-400'"
+          :class="originalObject ? 'border-blue-500 bg-linear-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 shadow-lg' : 'border-slate-300 border-dashed bg-slate-50 dark:bg-slate-800 hover:border-slate-400'"
           @click="createOriginal"
         >
           <div class="text-4xl mb-2">{{ originalObject ? '📄' : '➕' }}</div>
@@ -43,7 +43,7 @@
         <div 
           v-for="(clone, index) in clones" 
           :key="clone.id"
-          class="w-32 h-24 rounded-xl flex flex-col items-center justify-center border-2 border-green-400 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 shadow-md animate-slide-in"
+          class="w-32 h-24 rounded-xl flex flex-col items-center justify-center border-2 border-green-400 bg-linear-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 shadow-md animate-slide-in"
         >
           <div class="text-2xl">📄</div>
           <div class="text-xs font-medium text-green-700">Clone {{ index + 1 }}</div>

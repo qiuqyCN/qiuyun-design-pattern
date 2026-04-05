@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StudyStatsPanel from '../components/statistics/StudyStatsPanel.vue';
+
+const title = '学习统计 - 秋云设计模式';
+const description = '查看你的设计模式学习进度和统计';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-40 pb-20 px-6 md:px-12 lg:px-24">
+    <div class="max-w-6xl mx-auto">
+      <!-- 页面标题 -->
+      <div class="mb-16">
+        <h1 class="text-3xl font-light tracking-tight mb-4">学习统计</h1>
+        <p class="text-slate-500 dark:text-slate-400">追踪你的设计模式学习进度</p>
+      </div>
+
+      <!-- 统计面板 -->
+      <StudyStatsPanel client:load />
+
+      <!-- 学习建议 -->
+      <div class="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-100 dark:border-blue-900/30">
+        <h3 class="font-medium mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          学习建议
+        </h3>
+        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 mt-0.5">•</span>
+            <span>建议按分类顺序学习：先掌握创建型模式，再学习结构型模式，最后深入行为型模式</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 mt-0.5">•</span>
+            <span>每个模式都要理解其意图、适用场景和优缺点，不要死记硬背</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 mt-0.5">•</span>
+            <span>通过实际项目练习来加深理解，尝试重构现有代码应用设计模式</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-blue-500 mt-0.5">•</span>
+            <span>保持每天学习的习惯，即使是15-20分钟也能积少成多</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

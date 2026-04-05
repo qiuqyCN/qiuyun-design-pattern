@@ -64,6 +64,7 @@ const { stats } = useLearningStats();
 const categoryStats = computed(() => {
   return categories.map(cat => ({
     ...cat,
+    total: cat.count,
     learned: stats.value.categoryProgress[cat.id].learned,
   }));
 });

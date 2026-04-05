@@ -58,7 +58,7 @@
       <div class="relative">
         <div 
           class="w-44 h-32 border-2 rounded-xl flex flex-col items-center justify-center transition-all duration-500 shadow-lg"
-          :class="instanceCreated ? 'border-green-500 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20' : 'border-slate-400 bg-slate-100 dark:bg-slate-800'"
+          :class="instanceCreated ? 'border-green-500 bg-linear-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20' : 'border-slate-400 bg-slate-100 dark:bg-slate-800'"
         >
           <span class="text-lg font-bold mb-3">Singleton</span>
           <div 

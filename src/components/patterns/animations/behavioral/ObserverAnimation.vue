@@ -52,7 +52,7 @@
           :key="index"
           class="w-36 h-14 rounded-lg flex items-center justify-center text-sm transition-all duration-500 border-2"
           :class="observer.notified ? 
-            'bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 text-green-700 border-green-400 shadow-sm' : 
+            'bg-linear-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 text-green-700 border-green-400 shadow-sm' : 
             'bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200'"
         >
           <span class="mr-2">{{ observer.notified ? '✓' : '○' }}</span>
