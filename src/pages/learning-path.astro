@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { patterns } from '../data/patterns';
+
+const title = '学习路径 - 秋云设计模式';
+const description = '循序渐进学习23种设计模式的推荐路径';
+
+// 学习阶段
+const learningStages = [
+  {
+    id: 'beginner',
+    name: '入门阶段',
+    description: '掌握最常用的5种设计模式，建立基础思维',
+    patterns: ['singleton', 'factory-method', 'observer', 'strategy', 'decorator'],
+    estimatedTime: '1-2周',
+    tips: [
+      '理解每个模式的意图和使用场景',
+      '通过简单例子练习实现',
+      '不要急于应用到实际项目'
+    ]
+  },
+  {
+    id: 'intermediate',
+    name: '进阶阶段',
+    description: '深入学习结构型模式，理解对象组合与结构',
+    patterns: ['adapter', 'facade', 'proxy', 'bridge', 'composite', 'abstract-factory', 'builder', 'prototype'],
+    estimatedTime: '3-4周',
+    tips: [
+      '对比相似模式的区别',
+      '学习如何在实际项目中选择',
+      '开始阅读开源框架源码'
+    ]
+  },
+  {
+    id: 'advanced',
+    name: '高级阶段',
+    description: '掌握复杂的行为型模式，提升架构设计能力',
+    patterns: ['command', 'iterator', 'mediator', 'memento', 'state', 'template-method', 'visitor', 'chain-of-responsibility', 'interpreter'],
+    estimatedTime: '4-6周',
+    tips: [
+      '理解模式之间的组合使用',
+      '分析复杂系统的模式应用',
+      '形成自己的设计模式思维'
+    ]
+  }
+];
+
+// 获取模式详情
+function getPatternDetails(ids: string[]) {
+  return ids.map(id => patterns.find(p => p.id === id)).filter(Boolean);
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-40 pb-20 px-6 md:px-12 lg:px-24">
+    <div class="max-w-6xl mx-auto">
+      <!-- 页面标题 -->
+      <div class="mb-16">
+        <h1 class="text-3xl font-light tracking-tight mb-4">学习路径</h1>
+        <p class="text-slate-500 dark:text-slate-400">循序渐进，从入门到精通23种设计模式</p>
+      </div>
+
+      <!-- 学习路线图 -->
+      <div class="mb-20">
+        <div class="flex flex-col md:flex-row items-stretch gap-4">
+          {learningStages.map((stage, index) => (
+            <div class="flex-1 relative">
+              <!-- 连接线 -->
+              {index < learningStages.length - 1 && (
+                <div class="hidden md:block absolute top-8 left-[60%] right-0 h-0.5 bg-slate-200 dark:bg-slate-800"></div>
+              )}
+              
+              <div class="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 h-full">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center text-sm font-medium">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 class="font-medium">{stage.name}</h3>
+                    <span class="text-xs text-slate-400">{stage.estimatedTime}</span>
+                  </div>
+                </div>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">{stage.description}</p>
+                <div class="flex flex-wrap gap-2">
+                  {getPatternDetails(stage.patterns.slice(0, 3)).map(pattern => (
+                    <span class="text-xs px-2 py-1 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+                      {pattern?.name}
+                    </span>
+                  ))}
+                  {stage.patterns.length > 3 && (
+                    <span class="text-xs px-2 py-1 text-slate-400">+{stage.patterns.length - 3}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 详细学习阶段 -->
+      <div class="space-y-16">
+        {learningStages.map((stage, stageIndex) => (
+          <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg font-medium">
+                {stageIndex + 1}
+              </div>
+              <div>
+                <h2 class="text-xl font-medium">{stage.name}</h2>
+                <p class="text-sm text-slate-400">预计学习时间：{stage.estimatedTime}</p>
+              </div>
+            </div>
+
+            <p class="text-slate-600 dark:text-slate-400 mb-8">{stage.description}</p>
+
+            <!-- 学习建议 -->
+            <div class="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 mb-8">
+              <h4 class="font-medium mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                学习建议
+              </h4>
+              <ul class="space-y-2">
+                {stage.tips.map(tip => (
+                  <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                    <span class="text-blue-500 mt-0.5">•</span>
+                    <span>{tip}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- 模式列表 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {getPatternDetails(stage.patterns).map((pattern, patternIndex) => (
+                <a 
+                  href={`/patterns/${pattern?.id}`}
+                  class="group flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                >
+                  <div class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-sm font-medium text-slate-500 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 transition-colors">
+                    {stageIndex * 10 + patternIndex + 1}
+                  </div>
+                  <div class="flex-1">
+                    <h5 class="font-medium mb-1 group-hover:text-blue-500 transition-colors">{pattern?.name}</h5>
+                    <p class="text-xs text-slate-400 line-clamp-2">{pattern?.description}</p>
+                  </div>
+                  <svg class="w-4 h-4 text-slate-300 group-hover:text-slate-500 transition-colors self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 开始学习 -->
+      <div class="mt-16 text-center">
+        <a 
+          href="/patterns"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium hover:bg-slate-700 dark:hover:bg-slate-200 transition-all"
+        >
+          开始学习
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
