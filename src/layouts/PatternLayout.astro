@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import type { DesignPattern } from '@/types/pattern';
 import { categoryNames, difficultyLabels } from '@/data/categories';
+import { patterns } from '@/data/patterns';
 
 interface Props {
   pattern: DesignPattern;
@@ -13,6 +14,10 @@ const difficultyName = difficultyLabels[pattern.difficulty] || pattern.difficult
 
 const title = `${pattern.name} - ${pattern.nameEn} | 秋云设计模式`;
 const description = pattern.intent;
+
+const currentIndex = patterns.findIndex(p => p.id === pattern.id);
+const prevPattern = currentIndex > 0 ? patterns[currentIndex - 1] : null;
+const nextPattern = currentIndex < patterns.length - 1 ? patterns[currentIndex + 1] : null;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -74,12 +79,28 @@ const description = pattern.intent;
           <!-- 上一篇/下一篇导航 -->
           <footer class="mt-24 pt-12 border-t border-slate-100 dark:border-slate-800">
             <div class="flex items-center justify-between">
-              <a href="#" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
-                ← 上一篇
-              </a>
-              <a href="#" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
-                下一篇 →
-              </a>
+              {prevPattern ? (
+                <a href={`/patterns/${prevPattern.id}`} class="group flex items-center gap-3 text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                  <span class="text-lg">←</span>
+                  <div class="flex flex-col items-start">
+                    <span class="text-xs text-slate-400 group-hover:text-slate-500">上一篇</span>
+                    <span class="font-medium">{prevPattern.name}</span>
+                  </div>
+                </a>
+              ) : (
+                <div />
+              )}
+              {nextPattern ? (
+                <a href={`/patterns/${nextPattern.id}`} class="group flex items-center gap-3 text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                  <div class="flex flex-col items-end">
+                    <span class="text-xs text-slate-400 group-hover:text-slate-500">下一篇</span>
+                    <span class="font-medium">{nextPattern.name}</span>
+                  </div>
+                  <span class="text-lg">→</span>
+                </a>
+              ) : (
+                <div />
+              )}
             </div>
           </footer>
         </div>
