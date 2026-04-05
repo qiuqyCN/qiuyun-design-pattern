@@ -16,68 +16,73 @@ const description = pattern.intent;
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- 锚点导航 -->
-  <aside slot="nav-extra" class="hidden lg:block fixed left-8 top-32 w-48">
-    <nav class="space-y-2">
-      <a href="#overview" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">概述</a>
-      <a href="#structure" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">结构</a>
-      <a href="#analogy" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">生活类比</a>
-      <a href="#implementation" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">代码实现</a>
-      <a href="#examples" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">实际应用</a>
-      <a href="#quiz" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">练习</a>
-      <a href="#related" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">相关模式</a>
-    </nav>
-  </aside>
-
   <!-- 主内容 -->
-  <div class="pt-24 pb-24 px-6 md:px-12 lg:px-24 lg:pl-64">
-    <div class="max-w-3xl mx-auto">
-      <!-- 面包屑导航 -->
-      <nav class="mb-8">
-        <ol class="flex items-center gap-2 text-sm">
-          <li>
-            <a href="/" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">首页</a>
-          </li>
-          <li class="text-slate-300">/</li>
-          <li>
-            <a href="/patterns" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">设计模式</a>
-          </li>
-          <li class="text-slate-300">/</li>
-          <li class="text-slate-600 dark:text-slate-400">{pattern.name}</li>
-        </ol>
-      </nav>
+  <div class="pt-24 pb-24 px-6 md:px-12 lg:px-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex gap-12">
+        <!-- 锚点导航 - 左侧固定宽度 -->
+        <aside class="hidden lg:block w-48 shrink-0">
+          <nav class="sticky top-32 space-y-2">
+            <a href="#overview" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">概述</a>
+            <a href="#structure" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">结构</a>
+            <a href="#analogy" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">生活类比</a>
+            <a href="#implementation" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">代码实现</a>
+            <a href="#examples" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">实际应用</a>
+            <a href="#quiz" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">练习</a>
+            <a href="#related" class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1">相关模式</a>
+          </nav>
+        </aside>
 
-      <!-- Hero 区域 -->
-      <header class="mb-16">
-        <div class="flex items-center gap-4 mb-6">
-          <span class="text-xs text-slate-400 uppercase tracking-widest">{categoryName}</span>
-          <span class="text-xs text-slate-400">{difficultyName}</span>
+        <!-- 内容区域 -->
+        <div class="flex-1 min-w-0">
+          <!-- 面包屑导航 -->
+          <nav class="mb-8">
+            <ol class="flex items-center gap-2 text-sm">
+              <li>
+                <a href="/" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">首页</a>
+              </li>
+              <li class="text-slate-300">/</li>
+              <li>
+                <a href="/patterns" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">设计模式</a>
+              </li>
+              <li class="text-slate-300">/</li>
+              <li class="text-slate-600 dark:text-slate-400">{pattern.name}</li>
+            </ol>
+          </nav>
+
+          <!-- Hero 区域 -->
+          <header class="mb-16">
+            <div class="flex items-center gap-4 mb-6">
+              <span class="text-xs text-slate-400 uppercase tracking-widest">{categoryName}</span>
+              <span class="text-xs text-slate-400">{difficultyName}</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 dark:text-white mb-4">
+              {pattern.name}
+            </h1>
+            <p class="text-lg text-slate-500 dark:text-slate-400 mb-6">
+              {pattern.nameEn}
+            </p>
+            <p class="text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+              {pattern.intent}
+            </p>
+          </header>
+
+          <!-- 内容插槽 -->
+          <slot />
+
+          <!-- 上一篇/下一篇导航 -->
+          <footer class="mt-24 pt-12 border-t border-slate-100 dark:border-slate-800">
+            <div class="flex items-center justify-between">
+              <a href="#" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                ← 上一篇
+              </a>
+              <a href="#" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                下一篇 →
+              </a>
+            </div>
+          </footer>
         </div>
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 dark:text-white mb-4">
-          {pattern.name}
-        </h1>
-        <p class="text-lg text-slate-500 dark:text-slate-400 mb-6">
-          {pattern.nameEn}
-        </p>
-        <p class="text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
-          {pattern.intent}
-        </p>
-      </header>
-
-      <!-- 内容插槽 -->
-      <slot />
-
-      <!-- 上一篇/下一篇导航 -->
-      <footer class="mt-24 pt-12 border-t border-slate-100 dark:border-slate-800">
-        <div class="flex items-center justify-between">
-          <a href="#" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
-            ← 上一篇
-          </a>
-          <a href="#" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
-            下一篇 →
-          </a>
-        </div>
-      </footer>
+      </div>
     </div>
   </div>
 
