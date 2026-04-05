@@ -59,81 +59,208 @@ export const factoryMethodPattern: DesignPattern = {
       Creator --> Product
       ConcreteCreator --> ConcreteProduct
     `,
+    mermaidDiagram: `
+classDiagram
+  class Product {
+    <<interface>>
+    +use()
+  }
+  class ConcreteProductA {
+    +use()
+  }
+  class ConcreteProductB {
+    +use()
+  }
+  class Creator {
+    <<abstract>>
+    +factoryMethod() Product
+    +operation()
+  }
+  class ConcreteCreatorA {
+    +factoryMethod() Product
+  }
+  class ConcreteCreatorB {
+    +factoryMethod() Product
+  }
+  
+  Product <|.. ConcreteProductA
+  Product <|.. ConcreteProductB
+  Creator <|-- ConcreteCreatorA
+  Creator <|-- ConcreteCreatorB
+  Creator ..> Product : creates
+  ConcreteCreatorA ..> ConcreteProductA : creates
+  ConcreteCreatorB ..> ConcreteProductB : creates
+  
+  style Product fill:#fff3e0,stroke:#f57c00,stroke-width:2px,stroke-dasharray: 5 5
+  style Creator fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+  style ConcreteProductA fill:#e3f2fd,stroke:#1976d2
+  style ConcreteProductB fill:#e3f2fd,stroke:#1976d2
+  style ConcreteCreatorA fill:#f3e5f5,stroke:#7b1fa2
+  style ConcreteCreatorB fill:#f3e5f5,stroke:#7b1fa2
+    `,
     animationSteps: [],
   },
   implementation: {
-    typescript: `// 产品接口
+    typescript: `/**
+ * 工厂方法模式 - TypeScript 实现
+ * 使用抽象类和接口实现
+ */
+
+// 产品接口
 interface Product {
   use(): void;
+  getName(): string;
 }
 
-// 具体产品
+// 具体产品 A
 class ConcreteProductA implements Product {
-  use() {
-    console.log('使用产品 A');
+  private name: string = "产品 A";
+
+  use(): void {
+    console.log(\`使用 \${this.name}\`);
+  }
+
+  getName(): string {
+    return this.name;
   }
 }
 
+// 具体产品 B
 class ConcreteProductB implements Product {
-  use() {
-    console.log('使用产品 B');
+  private name: string = "产品 B";
+
+  use(): void {
+    console.log(\`使用 \${this.name}\`);
+  }
+
+  getName(): string {
+    return this.name;
   }
 }
 
 // 创建者抽象类
 abstract class Creator {
+  /**
+   * 工厂方法 - 由子类实现
+   */
   abstract factoryMethod(): Product;
 
+  /**
+   * 业务逻辑 - 使用工厂方法创建的产品
+   */
   operation(): void {
     const product = this.factoryMethod();
+    console.log(\`创建者：我现在正在使用 \${product.getName()}\`);
     product.use();
   }
 }
 
-// 具体创建者
+// 具体创建者 A
 class ConcreteCreatorA extends Creator {
   factoryMethod(): Product {
     return new ConcreteProductA();
   }
 }
 
+// 具体创建者 B
 class ConcreteCreatorB extends Creator {
   factoryMethod(): Product {
     return new ConcreteProductB();
   }
 }
 
-// 使用
-const creatorA = new ConcreteCreatorA();
-creatorA.operation(); // 输出: 使用产品 A`,
+/**
+ * 工厂方法模式 - 函数式实现（TypeScript 特色）
+ * 使用函数而非类来实现工厂
+ */
+type ProductFactory = () => Product;
 
-    java: `// 产品接口
+function createProductA(): Product {
+  return new ConcreteProductA();
+}
+
+function createProductB(): Product {
+  return new ConcreteProductB();
+}
+
+// 使用工厂函数
+function clientCodeWithFactory(factory: ProductFactory): void {
+  const product = factory();
+  product.use();
+}
+
+// 使用示例
+function clientCode(): void {
+  console.log("=== 类方式实现 ===");
+  
+  const creatorA = new ConcreteCreatorA();
+  creatorA.operation();
+  
+  const creatorB = new ConcreteCreatorB();
+  creatorB.operation();
+  
+  console.log("\\n=== 函数式实现 ===");
+  
+  clientCodeWithFactory(createProductA);
+  clientCodeWithFactory(createProductB);
+}
+
+clientCode();`,
+
+    java: `/**
+ * 工厂方法模式 - Java 实现
+ * 使用抽象类和接口实现
+ */
+
+// 产品接口
 public interface Product {
     void use();
+    String getName();
 }
 
 // 具体产品 A
 public class ConcreteProductA implements Product {
+    private String name = "产品 A";
+
     @Override
     public void use() {
-        System.out.println("使用产品 A");
+        System.out.println("使用 " + name);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }
 
 // 具体产品 B
 public class ConcreteProductB implements Product {
+    private String name = "产品 B";
+
     @Override
     public void use() {
-        System.out.println("使用产品 B");
+        System.out.println("使用 " + name);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }
 
 // 创建者抽象类
 public abstract class Creator {
+    /**
+     * 工厂方法 - 由子类实现
+     */
     public abstract Product factoryMethod();
-    
+
+    /**
+     * 业务逻辑 - 使用工厂方法创建的产品
+     */
     public void operation() {
         Product product = factoryMethod();
+        System.out.println("创建者：我现在正在使用 " + product.getName());
         product.use();
     }
 }
@@ -154,112 +281,381 @@ public class ConcreteCreatorB extends Creator {
     }
 }
 
+/**
+ * 工厂方法模式 - 使用函数式接口（Java 8+）
+ * 使用 Supplier 函数式接口实现工厂
+ */
+import java.util.function.Supplier;
+
+public class FunctionalFactory {
+    /**
+     * 使用 Supplier 作为工厂方法
+     */
+    public static Product createProduct(Supplier<Product> factory) {
+        return factory.get();
+    }
+    
+    public static void main(String[] args) {
+        // 使用 Lambda 表达式作为工厂
+        Product productA = createProduct(ConcreteProductA::new);
+        Product productB = createProduct(ConcreteProductB::new);
+        
+        productA.use();
+        productB.use();
+    }
+}
+
 // 客户端代码
 public class Client {
     public static void main(String[] args) {
+        System.out.println("=== 类方式实现 ===");
+        
         Creator creatorA = new ConcreteCreatorA();
-        creatorA.operation(); // 输出: 使用产品 A
+        creatorA.operation();
         
         Creator creatorB = new ConcreteCreatorB();
-        creatorB.operation(); // 输出: 使用产品 B
+        creatorB.operation();
+        
+        System.out.println("\\n=== 函数式实现 ===");
+        
+        Product productA = FunctionalFactory.createProduct(ConcreteProductA::new);
+        Product productB = FunctionalFactory.createProduct(ConcreteProductB::new);
+        
+        productA.use();
+        productB.use();
     }
 }`,
 
     go: `package factory
 
+import (
+	"fmt"
+)
+
+/**
+ * 工厂方法模式 - Go 实现
+ * 使用 interface 和 struct 实现
+ */
+
 // Product 接口
 type Product interface {
-    Use()
+	Use()
+	GetName() string
 }
 
-// ConcreteProductA 具体产品
-type ConcreteProductA struct{}
+// ConcreteProductA 具体产品 A
+type ConcreteProductA struct {
+	name string
+}
+
+func NewConcreteProductA() *ConcreteProductA {
+	return &ConcreteProductA{name: "产品 A"}
+}
 
 func (p *ConcreteProductA) Use() {
-    println("使用产品 A")
+	fmt.Printf("使用 %s\\n", p.name)
+}
+
+func (p *ConcreteProductA) GetName() string {
+	return p.name
+}
+
+// ConcreteProductB 具体产品 B
+type ConcreteProductB struct {
+	name string
+}
+
+func NewConcreteProductB() *ConcreteProductB {
+	return &ConcreteProductB{name: "产品 B"}
+}
+
+func (p *ConcreteProductB) Use() {
+	fmt.Printf("使用 %s\\n", p.name)
+}
+
+func (p *ConcreteProductB) GetName() string {
+	return p.name
 }
 
 // Creator 接口
 type Creator interface {
-    FactoryMethod() Product
-    Operation()
+	FactoryMethod() Product
+	Operation()
 }
 
-// ConcreteCreatorA 具体创建者
+// ConcreteCreatorA 具体创建者 A
 type ConcreteCreatorA struct{}
 
 func (c *ConcreteCreatorA) FactoryMethod() Product {
-    return &ConcreteProductA{}
+	return NewConcreteProductA()
 }
 
 func (c *ConcreteCreatorA) Operation() {
-    product := c.FactoryMethod()
-    product.Use()
+	product := c.FactoryMethod()
+	fmt.Printf("创建者：我现在正在使用 %s\\n", product.GetName())
+	product.Use()
+}
+
+// ConcreteCreatorB 具体创建者 B
+type ConcreteCreatorB struct{}
+
+func (c *ConcreteCreatorB) FactoryMethod() Product {
+	return NewConcreteProductB()
+}
+
+func (c *ConcreteCreatorB) Operation() {
+	product := c.FactoryMethod()
+	fmt.Printf("创建者：我现在正在使用 %s\\n", product.GetName())
+	product.Use()
+}
+
+/**
+ * 工厂方法模式 - 使用函数类型（Go 特色）
+ * 使用函数作为工厂
+ */
+type ProductFactory func() Product
+
+func ClientCodeWithFactory(factory ProductFactory) {
+	product := factory()
+	product.Use()
+}
+
+// 使用示例
+func ClientCode() {
+	fmt.Println("=== 类方式实现 ===")
+	
+	creatorA := &ConcreteCreatorA{}
+	creatorA.Operation()
+	
+	creatorB := &ConcreteCreatorB{}
+	creatorB.Operation()
+	
+	fmt.Println("\\n=== 函数式实现 ===")
+	
+	ClientCodeWithFactory(NewConcreteProductA)
+	ClientCodeWithFactory(NewConcreteProductB)
 }`,
 
     python: `from abc import ABC, abstractmethod
+from typing import Callable
+
+/**
+ * 工厂方法模式 - Python 实现
+ * 使用抽象基类实现
+ */
 
 # 产品接口
 class Product(ABC):
     @abstractmethod
-    def use(self):
+    def use(self) -> None:
+        pass
+    
+    @abstractmethod
+    def get_name(self) -> str:
         pass
 
-# 具体产品
+# 具体产品 A
 class ConcreteProductA(Product):
-    def use(self):
-        print("使用产品 A")
+    def __init__(self):
+        self._name = "产品 A"
+    
+    def use(self) -> None:
+        print(f"使用 {self._name}")
+    
+    def get_name(self) -> str:
+        return self._name
+
+# 具体产品 B
+class ConcreteProductB(Product):
+    def __init__(self):
+        self._name = "产品 B"
+    
+    def use(self) -> None:
+        print(f"使用 {self._name}")
+    
+    def get_name(self) -> str:
+        return self._name
 
 # 创建者抽象类
 class Creator(ABC):
+    """
+    创建者抽象类
+    """
+    
     @abstractmethod
     def factory_method(self) -> Product:
+        """
+        工厂方法 - 由子类实现
+        """
         pass
     
-    def operation(self):
+    def operation(self) -> None:
+        """
+        业务逻辑 - 使用工厂方法创建的产品
+        """
         product = self.factory_method()
+        print(f"创建者：我现在正在使用 {product.get_name()}")
         product.use()
 
-# 具体创建者
+# 具体创建者 A
 class ConcreteCreatorA(Creator):
     def factory_method(self) -> Product:
-        return ConcreteProductA()`,
+        return ConcreteProductA()
 
-    cpp: `// 产品接口
+# 具体创建者 B
+class ConcreteCreatorB(Creator):
+    def factory_method(self) -> Product:
+        return ConcreteProductB()
+
+/**
+ * 工厂方法模式 - 使用函数（Python 特色）
+ * 使用函数作为工厂
+ */
+ProductFactory = Callable[[], Product]
+
+def client_code_with_factory(factory: ProductFactory) -> None:
+    product = factory()
+    product.use()
+
+# 使用示例
+def client_code():
+    print("=== 类方式实现 ===")
+    
+    creator_a = ConcreteCreatorA()
+    creator_a.operation()
+    
+    creator_b = ConcreteCreatorB()
+    creator_b.operation()
+    
+    print("\\n=== 函数式实现 ===")
+    
+    client_code_with_factory(ConcreteProductA)
+    client_code_with_factory(ConcreteProductB)
+
+if __name__ == "__main__":
+    client_code()`,
+
+    cpp: `/**
+ * 工厂方法模式 - C++ 实现
+ * 使用抽象类和虚函数实现
+ */
+
+#include <iostream>
+#include <memory>
+#include <string>
+
+// 产品接口
 class Product {
 public:
     virtual void use() = 0;
+    virtual std::string getName() const = 0;
     virtual ~Product() = default;
 };
 
-// 具体产品
+// 具体产品 A
 class ConcreteProductA : public Product {
+private:
+    std::string name = "产品 A";
+
 public:
     void use() override {
-        std::cout << "使用产品 A" << std::endl;
+        std::cout << "使用 " << name << std::endl;
+    }
+
+    std::string getName() const override {
+        return name;
+    }
+};
+
+// 具体产品 B
+class ConcreteProductB : public Product {
+private:
+    std::string name = "产品 B";
+
+public:
+    void use() override {
+        std::cout << "使用 " << name << std::endl;
+    }
+
+    std::string getName() const override {
+        return name;
     }
 };
 
 // 创建者抽象类
 class Creator {
 public:
-    virtual Product* factoryMethod() = 0;
-    
+    /**
+     * 工厂方法 - 由子类实现
+     */
+    virtual std::unique_ptr<Product> factoryMethod() = 0;
+
+    /**
+     * 业务逻辑 - 使用工厂方法创建的产品
+     */
     void operation() {
-        Product* product = factoryMethod();
+        auto product = factoryMethod();
+        std::cout << "创建者：我现在正在使用 " << product->getName() << std::endl;
         product->use();
     }
-    
+
     virtual ~Creator() = default;
 };
 
-// 具体创建者
+// 具体创建者 A
 class ConcreteCreatorA : public Creator {
 public:
-    Product* factoryMethod() override {
-        return new ConcreteProductA();
+    std::unique_ptr<Product> factoryMethod() override {
+        return std::make_unique<ConcreteProductA>();
     }
-};`,
+};
+
+// 具体创建者 B
+class ConcreteCreatorB : public Creator {
+public:
+    std::unique_ptr<Product> factoryMethod() override {
+        return std::make_unique<ConcreteProductB>();
+    }
+};
+
+/**
+ * 工厂方法模式 - 使用函数指针/函数对象（C++ 特色）
+ * 使用 std::function 作为工厂
+ */
+#include <functional>
+
+using ProductFactory = std::function<std::unique_ptr<Product>()>;
+
+std::unique_ptr<Product> createProductA() {
+    return std::make_unique<ConcreteProductA>();
+}
+
+std::unique_ptr<Product> createProductB() {
+    return std::make_unique<ConcreteProductB>();
+}
+
+void clientCodeWithFactory(const ProductFactory& factory) {
+    auto product = factory();
+    product->use();
+}
+
+// 使用示例
+int main() {
+    std::cout << "=== 类方式实现 ===" << std::endl;
+    
+    std::unique_ptr<Creator> creatorA = std::make_unique<ConcreteCreatorA>();
+    creatorA->operation();
+    
+    std::unique_ptr<Creator> creatorB = std::make_unique<ConcreteCreatorB>();
+    creatorB->operation();
+    
+    std::cout << "\\n=== 函数式实现 ===" << std::endl;
+    
+    clientCodeWithFactory(createProductA);
+    clientCodeWithFactory(createProductB);
+    
+    return 0;
+}`,
   },
   realWorldExamples: [
     {

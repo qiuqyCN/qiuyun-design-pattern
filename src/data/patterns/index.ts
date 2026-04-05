@@ -21,6 +21,7 @@ import { statePattern } from './state';
 import { strategyPattern } from './strategy';
 import { templateMethodPattern } from './template-method';
 import { visitorPattern } from './visitor';
+import { interpreterPattern } from './interpreter';
 
 // 所有设计模式数据
 export const patterns: DesignPattern[] = [
@@ -49,6 +50,7 @@ export const patterns: DesignPattern[] = [
   strategyPattern,
   templateMethodPattern,
   visitorPattern,
+  interpreterPattern,
 ];
 
 // 按分类获取模式
