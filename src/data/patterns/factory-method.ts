@@ -112,11 +112,19 @@ public interface Product {
     void use();
 }
 
-// 具体产品
+// 具体产品 A
 public class ConcreteProductA implements Product {
     @Override
     public void use() {
         System.out.println("使用产品 A");
+    }
+}
+
+// 具体产品 B
+public class ConcreteProductB implements Product {
+    @Override
+    public void use() {
+        System.out.println("使用产品 B");
     }
 }
 
@@ -130,11 +138,30 @@ public abstract class Creator {
     }
 }
 
-// 具体创建者
+// 具体创建者 A
 public class ConcreteCreatorA extends Creator {
     @Override
     public Product factoryMethod() {
         return new ConcreteProductA();
+    }
+}
+
+// 具体创建者 B
+public class ConcreteCreatorB extends Creator {
+    @Override
+    public Product factoryMethod() {
+        return new ConcreteProductB();
+    }
+}
+
+// 客户端代码
+public class Client {
+    public static void main(String[] args) {
+        Creator creatorA = new ConcreteCreatorA();
+        creatorA.operation(); // 输出: 使用产品 A
+        
+        Creator creatorB = new ConcreteCreatorB();
+        creatorB.operation(); // 输出: 使用产品 B
     }
 }`,
 

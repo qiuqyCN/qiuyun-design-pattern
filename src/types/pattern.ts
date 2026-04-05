@@ -27,6 +27,7 @@ export interface DesignPattern {
   };
   structure: {
     classDiagram: string;
+    mermaidDiagram?: string;
     animationSteps: AnimationStep[];
   };
   implementation: {

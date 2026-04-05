@@ -44,9 +44,13 @@
     <!-- 结构 -->
     <section id="structure" class="pt-8 border-t border-slate-100 dark:border-slate-800">
       <h2 class="text-2xl font-light text-slate-900 dark:text-white mb-6">结构</h2>
-      <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-lg">
-        <pre class="text-sm text-slate-700 dark:text-slate-300 overflow-x-auto">{{ pattern.structure.classDiagram }}</pre>
-      </div>
+      <ClassDiagram :pattern-id="pattern.id" :mermaid-diagram="pattern.structure.mermaidDiagram" />
+    </section>
+
+    <!-- 交互演示 -->
+    <section id="animation" class="pt-8 border-t border-slate-100 dark:border-slate-800">
+      <h2 class="text-2xl font-light text-slate-900 dark:text-white mb-6">交互演示</h2>
+      <PatternAnimation :pattern-id="pattern.id" />
     </section>
 
     <!-- 生活类比 -->
@@ -81,7 +85,7 @@
       </div>
 
       <!-- 代码展示 - 使用 CodeBlock 组件 -->
-      <CodeBlock :code="currentCode" :language="currentLanguage" />
+      <CodeBlock :key="currentLanguage" :code="currentCode" :language="currentLanguage" />
     </section>
 
     <!-- 实际应用 -->
@@ -147,20 +151,22 @@ import { ref, computed } from 'vue';
 import type { DesignPattern } from '@/types/pattern';
 import { patternNames } from '@/data/patterns';
 import CodeBlock from './CodeBlock.vue';
+import ClassDiagram from './ClassDiagram.vue';
+import PatternAnimation from './PatternAnimation.vue';
 
 const props = defineProps<{
   pattern: DesignPattern;
 }>();
 
 const languages = [
-  { id: 'typescript', name: 'TypeScript' },
   { id: 'java', name: 'Java' },
+  { id: 'typescript', name: 'TypeScript' },
   { id: 'go', name: 'Go' },
   { id: 'python', name: 'Python' },
   { id: 'cpp', name: 'C++' },
 ];
 
-const currentLanguage = ref('typescript');
+const currentLanguage = ref('java');
 
 const currentCode = computed(() => {
   const impl = props.pattern.implementation;
