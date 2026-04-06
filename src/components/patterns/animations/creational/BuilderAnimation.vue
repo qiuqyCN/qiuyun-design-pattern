@@ -78,7 +78,7 @@
     <!-- 进度条 -->
     <div class="mt-8 w-96 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
       <div 
-        class="h-full bg-gradient-to-r from-green-400 to-green-500 transition-all duration-500"
+        class="h-full bg-linear-to-r from-green-400 to-green-500 transition-all duration-500"
         :style="{ width: `${(buildProgress / 3) * 100}%` }"
       ></div>
     </div>

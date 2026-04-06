@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import type { DesignPattern } from '@/types/pattern';
 import { categoryNames, difficultyLabels } from '@/data/categories';
 import { patterns } from '@/data/patterns';
+import ExportButton from '@/components/patterns/ExportButton.vue';
 
 interface Props {
   pattern: DesignPattern;
@@ -42,7 +43,7 @@ const nextPattern = currentIndex < patterns.length - 1 ? patterns[currentIndex +
         <!-- 内容区域 -->
         <div class="flex-1 min-w-0">
           <!-- 面包屑导航 -->
-          <nav class="mb-8">
+          <nav class="mb-8 flex items-center justify-between">
             <ol class="flex items-center gap-2 text-sm">
               <li>
                 <a href="/" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">首页</a>
@@ -54,6 +55,7 @@ const nextPattern = currentIndex < patterns.length - 1 ? patterns[currentIndex +
               <li class="text-slate-300">/</li>
               <li class="text-slate-600 dark:text-slate-400">{pattern.name}</li>
             </ol>
+            <ExportButton client:load pattern={pattern} />
           </nav>
 
           <!-- Hero 区域 -->
