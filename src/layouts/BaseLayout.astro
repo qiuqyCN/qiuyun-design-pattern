@@ -18,6 +18,7 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/logo.png" />
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +28,10 @@ const {
     <!-- 导航 -->
     <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6">
       <div class="max-w-6xl mx-auto flex items-center justify-between">
-        <a href="/" class="text-sm font-medium tracking-wide">秋云设计模式</a>
+        <a href="/" class="flex items-center gap-2">
+          <img src="/logo.png" alt="秋云设计模式" class="h-6 w-auto" />
+          <span class="text-sm font-medium tracking-wide">秋云设计模式</span>
+        </a>
         <div class="flex items-center gap-8">
           <a href="/" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">首页</a>
           <a href="/patterns" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">模式</a>

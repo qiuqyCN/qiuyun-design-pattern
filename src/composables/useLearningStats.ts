@@ -22,6 +22,27 @@ const defaultStats: LearningStatistics = {
   dailyRecords: [],
 };
 
+// 已学习模式集合（用于准确统计）
+const LEARNED_PATTERNS_KEY = 'qiuyun-learned-patterns';
+
+function loadLearnedPatterns(): Set<string> {
+  if (typeof window === 'undefined') return new Set();
+  const stored = localStorage.getItem(LEARNED_PATTERNS_KEY);
+  if (stored) {
+    try {
+      return new Set(JSON.parse(stored));
+    } catch {
+      return new Set();
+    }
+  }
+  return new Set();
+}
+
+function saveLearnedPatterns(patterns: Set<string>) {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(LEARNED_PATTERNS_KEY, JSON.stringify([...patterns]));
+}
+
 // 从 localStorage 加载数据
 function loadStats(): LearningStatistics {
   if (typeof window === 'undefined') return defaultStats;
@@ -62,10 +83,11 @@ function getYesterday(): string {
 
 export function useLearningStats() {
   const stats = ref<LearningStatistics>(loadStats());
+  const learnedPatternsSet = ref<Set<string>>(loadLearnedPatterns());
 
   // 计算属性
   const isLearned = computed(() => (patternId: string) => {
-    return stats.value.recentLearned.includes(patternId);
+    return learnedPatternsSet.value.has(patternId);
   });
 
   const todayLearned = computed(() => {
@@ -79,9 +101,13 @@ export function useLearningStats() {
     const today = getToday();
     
     // 如果已经学习过，不重复计算
-    if (stats.value.recentLearned.includes(patternId)) {
+    if (learnedPatternsSet.value.has(patternId)) {
       return;
     }
+
+    // 添加到已学习集合
+    learnedPatternsSet.value.add(patternId);
+    saveLearnedPatterns(learnedPatternsSet.value);
 
     // 更新最近学习列表
     stats.value.recentLearned.unshift(patternId);
@@ -92,8 +118,8 @@ export function useLearningStats() {
     // 更新分类进度
     stats.value.categoryProgress[category].learned++;
 
-    // 更新总学习数
-    stats.value.learnedPatterns = stats.value.recentLearned.length;
+    // 更新总学习数（使用Set的准确计数）
+    stats.value.learnedPatterns = learnedPatternsSet.value.size;
     stats.value.completedPercentage = Math.round(
       (stats.value.learnedPatterns / stats.value.totalPatterns) * 100
     );
