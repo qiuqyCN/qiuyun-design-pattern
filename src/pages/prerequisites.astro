@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { prerequisiteSections, sectionTitles } from '@/data/prerequisites';
+import PrerequisiteContent from '@/components/prerequisites/PrerequisiteContent.vue';
+import ExportPrereqButton from '@/components/prerequisites/ExportPrereqButton.vue';
+
+const title = '前置知识 | 秋云设计模式';
+const description = '学习设计模式前需要掌握的面向对象基础、UML类图、SOLID原则等前置知识';
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="pt-32 pb-24 px-6 md:px-12 lg:px-24">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex gap-12">
+        <!-- 左侧导航 -->
+        <aside class="hidden lg:block w-48 shrink-0">
+          <nav class="sticky top-32 space-y-2">
+            {prerequisiteSections.map((section) => (
+              <a
+                href={`#${section.id}`}
+                class="block text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors py-1"
+              >
+                {section.title}
+              </a>
+            ))}
+          </nav>
+        </aside>
+
+        <!-- 内容区域 -->
+        <div class="flex-1 min-w-0">
+          <!-- 面包屑 -->
+          <nav class="mb-8 flex items-center justify-between">
+            <ol class="flex items-center gap-2 text-sm">
+              <li>
+                <a href="/" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">首页</a>
+              </li>
+              <li class="text-slate-300">/</li>
+              <li class="text-slate-600 dark:text-slate-400">前置知识</li>
+            </ol>
+            <ExportPrereqButton client:load />
+          </nav>
+
+          <!-- 标题区 -->
+          <header class="mb-16">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 dark:text-white mb-4">
+              前置知识
+            </h1>
+            <p class="text-lg text-slate-500 dark:text-slate-400">
+              学习设计模式前需要掌握的基础知识
+            </p>
+          </header>
+
+          <!-- 内容 -->
+          <PrerequisiteContent client:load sections={prerequisiteSections} />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 锚点平滑滚动 -->
+  <script slot="head">
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</BaseLayout>

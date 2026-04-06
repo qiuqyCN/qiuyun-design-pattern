@@ -3,9 +3,9 @@
     <!-- 背景装饰元素 -->
     <div class="absolute inset-0 pointer-events-none">
       <!-- 左上角装饰圆 -->
-      <div class="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-gradient-to-br from-slate-100 to-transparent dark:from-slate-800/30 opacity-50 blur-3xl animate-pulse-slow"></div>
+      <div class="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-linear-to-br from-slate-100 to-transparent dark:from-slate-800/30 opacity-50 blur-3xl animate-pulse-slow"></div>
       <!-- 右下角装饰圆 -->
-      <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-slate-100 to-transparent dark:from-slate-800/30 opacity-50 blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+      <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-linear-to-tl from-slate-100 to-transparent dark:from-slate-800/30 opacity-50 blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
       
       <!-- 悬浮代码片段装饰 -->
       <div class="absolute top-1/4 right-[10%] opacity-10 dark:opacity-5 animate-float" style="animation-delay: 0s;">
@@ -66,6 +66,19 @@ abstract class Factory {
           <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
           </svg>
+        </a>
+      </div>
+
+      <!-- 前置知识提示 -->
+      <div class="mt-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.8s; animation-fill-mode: forwards;">
+        <a 
+          href="/prerequisites" 
+          class="inline-flex items-center text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+          零基础？先了解前置知识
         </a>
       </div>
 
