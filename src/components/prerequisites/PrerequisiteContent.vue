@@ -29,21 +29,11 @@
             {{ subsection.content }}
           </p>
 
-          <div
+          <CodeBlock
             v-if="subsection.code"
-            class="bg-slate-900 rounded-lg overflow-hidden"
-          >
-            <div class="flex items-center justify-between px-4 py-2 bg-slate-800">
-              <span class="text-xs text-slate-400">{{ subsection.language || 'code' }}</span>
-              <button
-                @click="copyCode(subsection.code)"
-                class="text-xs text-slate-400 hover:text-slate-200 transition-colors"
-              >
-                复制
-              </button>
-            </div>
-            <pre class="p-4 overflow-x-auto"><code class="text-sm text-slate-300 font-mono">{{ subsection.code }}</code></pre>
-          </div>
+            :code="subsection.code"
+            :language="subsection.language || 'java'"
+          />
         </div>
       </div>
     </section>
@@ -52,18 +42,11 @@
 
 <script setup lang="ts">
 import type { PrerequisiteSection } from '@/data/prerequisites';
+import CodeBlock from '@/components/patterns/CodeBlock.vue';
 
 interface Props {
   sections: PrerequisiteSection[];
 }
 
 defineProps<Props>();
-
-async function copyCode(code: string) {
-  try {
-    await navigator.clipboard.writeText(code);
-  } catch (error) {
-    console.error('复制失败:', error);
-  }
-}
 </script>
