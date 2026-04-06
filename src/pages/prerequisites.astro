@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { prerequisiteSections, sectionTitles } from '@/data/prerequisites';
 import PrerequisiteContent from '@/components/prerequisites/PrerequisiteContent.vue';
 import ExportPrereqButton from '@/components/prerequisites/ExportPrereqButton.vue';
+import BackToTop from '@/components/ui/BackToTop.vue';
 
 const title = '前置知识 | 秋云设计模式';
 const description = '学习设计模式前需要掌握的面向对象基础、UML类图、SOLID原则等前置知识';
@@ -56,6 +57,9 @@ const description = '学习设计模式前需要掌握的面向对象基础、UM
       </div>
     </div>
   </div>
+
+  <!-- 返回顶部按钮 -->
+  <BackToTop client:load />
 
   <!-- 锚点平滑滚动 -->
   <script slot="head">

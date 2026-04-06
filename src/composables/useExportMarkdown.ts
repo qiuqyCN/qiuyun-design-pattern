@@ -63,8 +63,17 @@ export function useExportMarkdown(pattern: DesignPattern) {
     const lines = ['## 结构'];
 
     if (pattern.structure) {
-      lines.push('', pattern.structure.description || '');
+      // 添加结构描述（如果有）
+      if (pattern.structure.description) {
+        lines.push('', pattern.structure.description);
+      }
 
+      // 添加类图（如果有）
+      if (pattern.structure.classDiagram) {
+        lines.push('', '### 类图', '', '```', pattern.structure.classDiagram.trim(), '```');
+      }
+
+      // 添加核心角色说明
       if (pattern.structure.animationSteps && pattern.structure.animationSteps.length > 0) {
         lines.push('', '### 核心角色', '');
         pattern.structure.animationSteps.forEach((step, index) => {

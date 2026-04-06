@@ -5,6 +5,7 @@ import { categoryNames, difficultyLabels } from '@/data/categories';
 import { patterns } from '@/data/patterns';
 import ExportButton from '@/components/patterns/ExportButton.vue';
 import LearningTimer from '@/components/patterns/LearningTimer.vue';
+import BackToTop from '@/components/ui/BackToTop.vue';
 
 interface Props {
   pattern: DesignPattern;
@@ -113,6 +114,9 @@ const nextPattern = currentIndex < patterns.length - 1 ? patterns[currentIndex +
       </div>
     </div>
   </div>
+
+  <!-- 返回顶部按钮 -->
+  <BackToTop client:load />
 
   <!-- 锚点平滑滚动脚本 -->
   <script slot="head">
