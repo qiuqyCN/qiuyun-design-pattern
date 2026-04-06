@@ -1,9 +1,18 @@
 ---
 import Layout from '@/layouts/BaseLayout.astro';
 import PatternList from '@/components/patterns/PatternList.vue';
+
+const title = '设计模式列表 | 秋云设计模式';
+const description = '23种经典设计模式完整列表，包括创建型模式（5种）、结构型模式（7种）、行为型模式（11种）。每种模式都有详细的图解、代码示例和实际应用案例。';
+const keywords = '设计模式列表, 创建型模式, 结构型模式, 行为型模式, 单例模式, 工厂模式, 观察者模式, 策略模式';
 ---
 
-<Layout title="设计模式 - 秋云设计模式">
+<Layout 
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL="/patterns"
+>
   <main class="min-h-screen pt-24">
     <PatternList client:load />
   </main>

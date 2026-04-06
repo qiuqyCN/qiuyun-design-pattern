@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { patterns } from '../data/patterns';
 
-const title = '学习路径 - 秋云设计模式';
-const description = '循序渐进学习23种设计模式的推荐路径';
+const title = '学习路径 | 秋云设计模式';
+const description = '循序渐进学习23种设计模式的推荐路径：入门阶段（5种常用模式）、进阶阶段（8种结构型模式）、高级阶段（9种行为型模式）。预计8-12周完成。';
+const keywords = '设计模式学习路径, 设计模式学习计划, 设计模式入门, 设计模式进阶, 设计模式学习顺序';
 
 // 学习阶段
 const learningStages = [
@@ -51,7 +52,12 @@ function getPatternDetails(ids: string[]) {
 }
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout 
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL="/learning-path"
+>
   <div class="pt-40 pb-20 px-6 md:px-12 lg:px-24">
     <div class="max-w-6xl mx-auto">
       <!-- 页面标题 -->

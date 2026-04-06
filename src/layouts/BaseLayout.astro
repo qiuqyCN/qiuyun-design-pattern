@@ -4,12 +4,23 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  noindex?: boolean;
 }
 
 const { 
   title = '秋云设计模式',
-  description = '23种经典设计模式学习'
+  description = '23种经典设计模式学习 - 以清晰、优雅的方式呈现。让复杂变得简单，让学习成为享受。',
+  keywords = '设计模式, Design Patterns, GoF, 单例模式, 工厂模式, 观察者模式, 面向对象, SOLID原则',
+  ogImage = '/logo.png',
+  canonicalURL = Astro.url.pathname,
+  noindex = false,
 } = Astro.props;
+
+const siteURL = 'https://patterns.qiuyun.dev';
+const fullCanonicalURL = `${siteURL}${canonicalURL}`;
 ---
 
 <!DOCTYPE html>
@@ -17,12 +28,59 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    
+    <!-- 基础 SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="秋云设计模式" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={fullCanonicalURL} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteURL}${ogImage}`} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="秋云设计模式" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={fullCanonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${siteURL}${ogImage}`} />
+    
+    <!-- 字体预加载 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "秋云设计模式",
+      "description": "23种经典设计模式学习平台",
+      "url": "https://patterns.qiuyun.dev",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://patterns.qiuyun.dev/patterns?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <slot name="head" />
   </head>
   <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased">
     <!-- 导航 -->
@@ -73,13 +131,13 @@ const {
             <span class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer">微信公众号</span>
             <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
               <div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 p-3">
-                <img src="/gzh.jpg" alt="微信公众号" class="max-w-80 max-h-96 w-auto h-auto object-contain rounded" />
+                <img src="/gzh.jpg" alt="微信公众号二维码" class="max-w-80 max-h-96 w-auto h-auto object-contain rounded" />
                 <div class="text-xs text-center text-slate-500 mt-2">扫码关注</div>
               </div>
               <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-white dark:border-t-slate-800"></div>
             </div>
           </div>
-          <a href="https://github.com/qiuqyCN/qiuyun-design-pattern" target="_blank" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">GitHub</a>
+          <a href="https://github.com/qiuqyCN/qiuyun-design-pattern" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">GitHub</a>
         </div>
       </div>
     </footer>
