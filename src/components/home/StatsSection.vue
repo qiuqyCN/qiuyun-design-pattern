@@ -11,25 +11,25 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
         <div>
           <div class="text-3xl md:text-4xl font-light text-slate-900 dark:text-white mb-2">
-            {{ stats.learnedPatterns }}<span class="text-slate-300">/</span>23
+            {{ isClient ? stats.learnedPatterns : 0 }}<span class="text-slate-300">/</span>23
           </div>
           <div class="text-sm text-slate-500">已学习</div>
         </div>
         <div>
           <div class="text-3xl md:text-4xl font-light text-slate-900 dark:text-white mb-2">
-            {{ stats.completedPercentage }}%
+            {{ isClient ? stats.completedPercentage : 0 }}%
           </div>
           <div class="text-sm text-slate-500">完成度</div>
         </div>
         <div>
           <div class="text-3xl md:text-4xl font-light text-slate-900 dark:text-white mb-2">
-            {{ stats.streakDays }}
+            {{ isClient ? stats.streakDays : 0 }}
           </div>
           <div class="text-sm text-slate-500">连续学习(天)</div>
         </div>
         <div>
           <div class="text-3xl md:text-4xl font-light text-slate-900 dark:text-white mb-2">
-            {{ Math.floor(stats.totalLearningTime / 60) }}h
+            {{ isClient ? Math.floor(stats.totalLearningTime / 60) : 0 }}h
           </div>
           <div class="text-sm text-slate-500">学习时长</div>
         </div>
@@ -45,7 +45,7 @@
           <div class="h-px bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
             <div 
               class="absolute inset-y-0 left-0 bg-slate-900 dark:bg-white transition-all duration-700"
-              :style="{ width: `${(cat.learned / cat.total) * 100}%` }"
+              :style="{ width: isClient ? `${(cat.learned / cat.total) * 100}%` : '0%' }"
             ></div>
           </div>
         </div>
@@ -55,17 +55,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useLearningStats } from '@/composables/useLearningStats';
 import { categories } from '@/data/categories';
 
 const { stats } = useLearningStats();
+const isClient = ref(false);
+
+onMounted(() => {
+  isClient.value = true;
+});
 
 const categoryStats = computed(() => {
   return categories.map(cat => ({
     ...cat,
     total: cat.count,
-    learned: stats.value.categoryProgress[cat.id].learned,
+    learned: isClient.value ? stats.value.categoryProgress[cat.id].learned : 0,
   }));
 });
 </script>

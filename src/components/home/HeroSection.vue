@@ -42,9 +42,16 @@ abstract class Factory {
         秋云设计模式
       </h1>
 
-      <!-- 副标题 -->
-      <p class="text-lg md:text-xl text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-12 max-w-2xl opacity-0 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
-        23 种经典设计模式，以清晰、优雅的方式呈现。让复杂变得简单，让学习成为享受。
+      <!-- 副标题 - 打字机效果 -->
+      <p 
+        class="text-lg md:text-xl text-slate-500 dark:text-slate-400 font-light leading-relaxed mb-12 max-w-2xl"
+        @click="skipTyping"
+      >
+        <span>{{ displayedText }}</span>
+        <span 
+          v-if="isTyping" 
+          class="inline-block w-0.5 h-5 bg-slate-400 dark:bg-slate-500 ml-1 animate-pulse"
+        ></span>
       </p>
 
       <!-- 操作按钮 -->
@@ -96,7 +103,52 @@ abstract class Factory {
 </template>
 
 <script setup lang="ts">
-// 极简主义，无需复杂逻辑
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const fullText = '23 种经典设计模式，以清晰、优雅的方式呈现。让复杂变得简单，让学习成为享受。';
+const displayedText = ref('');
+const isTyping = ref(true);
+let intervalId: number | null = null;
+
+function startTyping() {
+  let index = 0;
+  intervalId = window.setInterval(() => {
+    if (index < fullText.length) {
+      displayedText.value += fullText[index];
+      index++;
+    } else {
+      isTyping.value = false;
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    }
+  }, 60); // 60ms/字，约 1.5 秒打完
+}
+
+function skipTyping() {
+  if (isTyping.value) {
+    isTyping.value = false;
+    displayedText.value = fullText;
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+}
+
+onMounted(() => {
+  // 延迟开始打字效果，等待渐入动画完成
+  setTimeout(() => {
+    startTyping();
+  }, 800);
+});
+
+onUnmounted(() => {
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+});
 </script>
 
 <style scoped>
