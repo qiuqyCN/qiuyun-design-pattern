@@ -9,6 +9,7 @@ export interface PrerequisiteSection {
     content: string;
     code?: string;
     language?: string;
+    mermaid?: string;
   }[];
 }
 
@@ -280,7 +281,44 @@ class Duck {
     subsections: [
       {
         title: '类的表示',
-        content: '在UML类图中，类用一个矩形表示，分为三层：类名、属性、方法。+ 表示 public，- 表示 private，# 表示 protected。'
+        content: '在UML类图中，类用一个矩形表示，分为三层：类名、属性、方法。+ 表示 public，- 表示 private，# 表示 protected。',
+        code: `// Java 类示例
+public class Animal {
+    private String name;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class Dog {
+    private String breed;
+    
+    public void bark() {
+        System.out.println("Woof!");
+    }
+    
+    public String getBreed() {
+        return breed;
+    }
+}`,
+        language: 'java',
+        mermaid: `classDiagram
+    class Animal {
+        -name: String
+        +getName(): String
+        +setName(name: String): void
+    }
+    
+    class Dog {
+        -breed: String
+        +bark(): void
+        +getBreed(): String
+    }`
       },
       {
         title: '继承（Generalization）',
@@ -292,11 +330,16 @@ public class Animal {
 
 public class Dog extends Animal {
     public void bark() { }
-}
-
-// UML表示：
-// Dog ─────▷ Animal`,
-        language: 'java'
+}`,
+        language: 'java',
+        mermaid: `classDiagram
+    Animal <|-- Dog
+    class Animal {
+        #name: String
+    }
+    class Dog {
+        +bark(): void
+    }`
       },
       {
         title: '实现（Realization）',
@@ -309,11 +352,17 @@ public interface Flyable {
 public class Bird implements Flyable {
     @Override
     public void fly() { }
-}
-
-// UML表示：
-// Bird - - -▷ Flyable`,
-        language: 'java'
+}`,
+        language: 'java',
+        mermaid: `classDiagram
+    class Flyable {
+        <<interface>>
+        +fly(): void
+    }
+    Flyable <|.. Bird
+    class Bird {
+        +fly(): void
+    }`
       },
       {
         title: '关联（Association）',
@@ -325,11 +374,10 @@ public class Teacher {
 
 public class Student {
     // 学生可能知道老师，也可能不知道
-}
-
-// UML表示：
-// Teacher ─────> Student`,
-        language: 'java'
+}`,
+        language: 'java',
+        mermaid: `classDiagram
+    Teacher "1" --> "0..*" Student : teaches`
       },
       {
         title: '依赖（Dependency）',
@@ -340,11 +388,10 @@ public class Person {
     public void useTool(Tool tool) {
         tool.operate();
     }
-}
-
-// UML表示：
-// Person - - -> Tool`,
-        language: 'java'
+}`,
+        language: 'java',
+        mermaid: `classDiagram
+    Person ..> Tool : uses`
       },
       {
         title: '聚合（Aggregation）',
@@ -360,11 +407,10 @@ public class Department {
 
 // 员工可以独立于部门存在
 Employee emp = new Employee();
-Department dept = new Department(Arrays.asList(emp));
-
-// UML表示：
-// Department ◇────> Employee`,
-        language: 'java'
+Department dept = new Department(Arrays.asList(emp));`,
+        language: 'java',
+        mermaid: `classDiagram
+    Department o-- Employee : contains`
       },
       {
         title: '组合（Composition）',
@@ -379,11 +425,42 @@ public class Car {
 }
 
 // 引擎不能独立于 Car 存在
-// Car 销毁时，Engine 也随之销毁
-
-// UML表示：
-// Car ◆────> Engine`,
-        language: 'java'
+// Car 销毁时，Engine 也随之销毁`,
+        language: 'java',
+        mermaid: `classDiagram
+    Car *-- Engine : owns`
+      },
+      {
+        title: '综合示例：设计模式中的类图',
+        content: '以观察者模式为例，展示一个完整的设计模式类图。',
+        mermaid: `classDiagram
+    class Subject {
+        <<interface>>
+        +attach(Observer): void
+        +detach(Observer): void
+        +notify(): void
+    }
+    
+    class ConcreteSubject {
+        -state: String
+        +getState(): String
+        +setState(state: String): void
+    }
+    
+    class Observer {
+        <<interface>>
+        +update(): void
+    }
+    
+    class ConcreteObserver {
+        -subject: Subject
+        +update(): void
+    }
+    
+    Subject <|.. ConcreteSubject
+    Observer <|.. ConcreteObserver
+    Subject "1" o-- "0..*" Observer : observers
+    ConcreteObserver --> ConcreteSubject : observes`
       }
     ]
   },

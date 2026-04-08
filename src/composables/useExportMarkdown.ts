@@ -63,14 +63,10 @@ export function useExportMarkdown(pattern: DesignPattern) {
     const lines = ['## 结构'];
 
     if (pattern.structure) {
-      // 添加结构描述（如果有）
-      if (pattern.structure.description) {
-        lines.push('', pattern.structure.description);
-      }
-
-      // 添加类图（如果有）
-      if (pattern.structure.classDiagram) {
-        lines.push('', '### 类图', '', '```', pattern.structure.classDiagram.trim(), '```');
+      // 添加类图（优先使用mermaidDiagram，如果没有则使用classDiagram）
+      const diagram = pattern.structure.mermaidDiagram || pattern.structure.classDiagram;
+      if (diagram) {
+        lines.push('', '### 类图', '', '```mermaid', diagram.trim(), '```');
       }
 
       // 添加核心角色说明
@@ -110,21 +106,21 @@ export function useExportMarkdown(pattern: DesignPattern) {
     const lines = ['## 代码实现'];
     const impl = pattern.implementation;
 
-    if (impl.typescript) {
-      lines.push('', '### TypeScript', '', '```typescript', impl.typescript, '```');
-    }
+    // if (impl.typescript) {
+    //   lines.push('', '### TypeScript', '', '```typescript', impl.typescript, '```');
+    // }
     if (impl.java) {
       lines.push('', '### Java', '', '```java', impl.java, '```');
     }
-    if (impl.python) {
-      lines.push('', '### Python', '', '```python', impl.python, '```');
-    }
-    if (impl.go) {
-      lines.push('', '### Go', '', '```go', impl.go, '```');
-    }
-    if (impl.cpp) {
-      lines.push('', '### C++', '', '```cpp', impl.cpp, '```');
-    }
+    // if (impl.python) {
+    //   lines.push('', '### Python', '', '```python', impl.python, '```');
+    // }
+    // if (impl.go) {
+    //   lines.push('', '### Go', '', '```go', impl.go, '```');
+    // }
+    // if (impl.cpp) {
+    //   lines.push('', '### C++', '', '```cpp', impl.cpp, '```');
+    // }
 
     return lines.join('\n');
   }
@@ -154,7 +150,7 @@ export function useExportMarkdown(pattern: DesignPattern) {
 
     const lines = ['## 相关模式', ''];
     pattern.relatedPatterns.forEach(id => {
-      lines.push(`- [${id}](/patterns/${id})`);
+      lines.push(`- [${id}](https://patterns.qiuyun.dev/patterns/${id})`);
     });
 
     return lines.join('\n');

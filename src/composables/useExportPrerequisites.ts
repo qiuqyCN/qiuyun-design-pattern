@@ -31,6 +31,13 @@ export function useExportPrerequisites() {
             lines.push('```');
             lines.push('');
           }
+          
+          if (subsection.mermaid) {
+            lines.push('```mermaid');
+            lines.push(subsection.mermaid);
+            lines.push('```');
+            lines.push('');
+          }
         });
       }
       

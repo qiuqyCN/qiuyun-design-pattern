@@ -31,6 +31,13 @@
             v-html="renderMarkdown(subsection.content)"
           />
 
+          <!-- Mermaid 图表 -->
+          <MermaidDiagram
+            v-if="subsection.mermaid"
+            :code="subsection.mermaid"
+          />
+
+          <!-- 代码块 -->
           <CodeBlock
             v-if="subsection.code"
             :code="subsection.code"
@@ -45,6 +52,7 @@
 <script setup lang="ts">
 import type { PrerequisiteSection } from '@/data/prerequisites';
 import CodeBlock from '@/components/patterns/CodeBlock.vue';
+import MermaidDiagram from '@/components/ui/MermaidDiagram.vue';
 
 interface Props {
   sections: PrerequisiteSection[];
