@@ -1,5 +1,6 @@
 import type { DesignPattern } from '@/types/pattern';
 import { categoryNames, difficultyLabels, frequencyLabels } from '@/data/categories';
+import { siteConfig } from '@/config/site';
 
 export function useExportMarkdown(pattern: DesignPattern) {
   function generateMarkdown(): string {
@@ -150,7 +151,7 @@ export function useExportMarkdown(pattern: DesignPattern) {
 
     const lines = ['## 相关模式', ''];
     pattern.relatedPatterns.forEach(id => {
-      lines.push(`- [${id}](https://patterns.qiuyun.dev/patterns/${id})`);
+      lines.push(`- [${id}](${siteConfig.url}/patterns/${id})`);
     });
 
     return lines.join('\n');

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { siteConfig } from '@/config/site';
 
 interface Props {
   title?: string;
@@ -11,15 +12,15 @@ interface Props {
 }
 
 const { 
-  title = '秋云设计模式',
-  description = '23种经典设计模式学习 - 以清晰、优雅的方式呈现。让复杂变得简单，让学习成为享受。',
+  title = siteConfig.title,
+  description = siteConfig.description,
   keywords = '设计模式, Design Patterns, GoF, 单例模式, 工厂模式, 观察者模式, 面向对象, SOLID原则',
   ogImage = '/logo.png',
   canonicalURL = Astro.url.pathname,
   noindex = false,
 } = Astro.props;
 
-const siteURL = 'https://patterns.qiuyun.dev';
+const siteURL = siteConfig.url;
 const fullCanonicalURL = `${siteURL}${canonicalURL}`;
 ---
 
@@ -33,7 +34,7 @@ const fullCanonicalURL = `${siteURL}${canonicalURL}`;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="author" content="秋云设计模式" />
+    <meta name="author" content={siteConfig.author} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     
     <!-- Canonical URL -->
@@ -50,7 +51,7 @@ const fullCanonicalURL = `${siteURL}${canonicalURL}`;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${siteURL}${ogImage}`} />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:site_name" content="秋云设计模式" />
+    <meta property="og:site_name" content={siteConfig.title} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -65,20 +66,18 @@ const fullCanonicalURL = `${siteURL}${canonicalURL}`;
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- 结构化数据 -->
-    <script type="application/ld+json">
-    {
+    <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "秋云设计模式",
-      "description": "23种经典设计模式学习平台",
-      "url": "https://qiuyun-design-pattern.vercel.app",
+      "name": siteConfig.title,
+      "description": siteConfig.description,
+      "url": siteConfig.url,
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://qiuyun-design-pattern.vercel.app/patterns?q={search_term_string}",
+        "target": `${siteConfig.url}/patterns?q={search_term_string}`,
         "query-input": "required name=search_term_string"
       }
-    }
-    </script>
+    })} />
     
     <slot name="head" />
   </head>
@@ -87,8 +86,8 @@ const fullCanonicalURL = `${siteURL}${canonicalURL}`;
     <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6">
       <div class="max-w-6xl mx-auto flex items-center justify-between">
         <a href="/" class="flex items-center gap-2">
-          <img src="/logo.png" alt="秋云设计模式" class="h-6 w-auto" />
-          <span class="text-sm font-medium tracking-wide">秋云设计模式</span>
+          <img src="/logo.png" alt={siteConfig.title} class="h-6 w-auto" />
+          <span class="text-sm font-medium tracking-wide">{siteConfig.title}</span>
         </a>
         <div class="flex items-center gap-8">
           <a href="/" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">首页</a>
@@ -123,7 +122,7 @@ const fullCanonicalURL = `${siteURL}${canonicalURL}`;
     <!-- Footer -->
     <footer class="py-12 px-6 md:px-12 lg:px-24 border-t border-slate-100 dark:border-slate-900">
       <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <span class="text-sm text-slate-400">秋云设计模式</span>
+        <span class="text-sm text-slate-400">{siteConfig.title}</span>
         <div class="flex items-center gap-6">
           <a href="/prerequisites" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">前置知识</a>
           <a href="/about" class="text-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">关于</a>
