@@ -8,24 +8,21 @@
       <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-linear-to-tl from-slate-100 to-transparent dark:from-slate-800/30 opacity-50 blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
       
       <!-- 悬浮代码片段装饰 -->
-      <div class="absolute top-1/4 right-[10%] opacity-10 dark:opacity-5 animate-float" style="animation-delay: 0s;">
-        <pre class="text-xs font-mono text-slate-400">
-class Singleton {
+      <div class="absolute top-1/4 right-[10%] opacity-60 dark:opacity-50 animate-float" style="animation-delay: 0s;">
+        <pre class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/60 px-4 py-3 rounded-lg backdrop-blur-sm border border-slate-300/60 dark:border-slate-600/40 shadow-md">class Singleton {
   static instance;
   getInstance() {
     return this.instance;
   }
 }</pre>
       </div>
-      <div class="absolute bottom-1/3 right-[5%] opacity-10 dark:opacity-5 animate-float" style="animation-delay: 2s;">
-        <pre class="text-xs font-mono text-slate-400">
-interface Observer {
+      <div class="absolute bottom-1/3 right-[5%] opacity-60 dark:opacity-50 animate-float" style="animation-delay: 2s;">
+        <pre class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/60 px-4 py-3 rounded-lg backdrop-blur-sm border border-slate-300/60 dark:border-slate-600/40 shadow-md">interface Observer {
   update(data: any): void;
 }</pre>
       </div>
-      <div class="absolute top-1/3 left-[5%] opacity-10 dark:opacity-5 animate-float" style="animation-delay: 1s;">
-        <pre class="text-xs font-mono text-slate-400">
-abstract class Factory {
+      <div class="absolute top-1/3 left-[5%] opacity-60 dark:opacity-50 animate-float" style="animation-delay: 1s;">
+        <pre class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/60 px-4 py-3 rounded-lg backdrop-blur-sm border border-slate-300/60 dark:border-slate-600/40 shadow-md">abstract class Factory {
   abstract createProduct();
 }</pre>
       </div>
