@@ -60,10 +60,7 @@ const fullCanonicalURL = `${siteURL}${canonicalURL}`;
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={`${siteURL}${ogImage}`} />
     
-    <!-- 字体预加载 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- 使用系统字体栈，无需外部字体加载 -->
     
     <!-- 结构化数据 -->
     <script type="application/ld+json" set:html={JSON.stringify({

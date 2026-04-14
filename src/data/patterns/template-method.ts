@@ -1777,7 +1777,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 }`,
     },
   ],
-  relatedPatterns: ['factory-method', 'strategy', 'state', 'hook-pattern'],
+  relatedPatterns: ['factory-method', 'strategy', 'state', 'iterator'],
   quiz: [
     {
       id: 'q1',

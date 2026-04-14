@@ -1953,7 +1953,7 @@ int main() {
 });`,
     },
   ],
-  relatedPatterns: ['singleton', 'mediator', 'strategy', 'publish-subscribe'],
+  relatedPatterns: ['singleton', 'mediator', 'strategy', 'command'],
   quiz: [
     {
       id: 'q1',
