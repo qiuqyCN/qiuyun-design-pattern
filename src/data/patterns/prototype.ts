@@ -404,8 +404,6 @@ clientCode();
 
 import java.io.*;
 import java.util.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 // ==================== 基本原型接口 ====================
 
@@ -413,7 +411,7 @@ import java.time.format.DateTimeFormatter;
  * 原型接口
  * 定义克隆方法，所有实现类都可以被复制
  */
-interface Prototype extends Cloneable {
+interface Prototype {
     /**
      * 克隆方法
      * @return 克隆的新对象
@@ -431,7 +429,7 @@ interface Prototype extends Cloneable {
  * 具体原型类 - 用户档案
  * 实现 Cloneable 接口，使用浅拷贝
  */
-class UserProfile implements Prototype {
+class UserProfile implements Prototype, Cloneable {
     private String id;
     private String name;
     private int age;
@@ -620,13 +618,13 @@ class PrototypeRegistry {
     
     public void register(String key, Prototype prototype) {
         prototypes.put(key, prototype);
-        System.out.println("原型 \"" + key + "\" 已注册");
+        System.out.println("原型 '" + key + "' 已注册");
     }
     
     public Prototype get(String key) {
         Prototype prototype = prototypes.get(key);
         if (prototype == null) {
-            System.out.println("原型 \"" + key + "\" 不存在");
+            System.out.println("原型 '" + key + "' 不存在");
             return null;
         }
         return prototype.clone();
@@ -693,7 +691,7 @@ public class PrototypeDemo {
         System.out.println("\\n--- 原型注册表 ---");
         PrototypeRegistry registry = new PrototypeRegistry();
         registry.register("admin-user", new UserProfile("A001", "管理员", 30, Arrays.asList("管理员")));
-        registry.register("level-1", new GameLevel("关卡1", 1));
+        registry.register("user-guest", new UserProfile("G001", "访客", 20, Arrays.asList("访客")));
         
         System.out.println("\\n注册的原型: " + registry.listPrototypes());
         
@@ -710,7 +708,7 @@ public class PrototypeDemo {
  * 4. 考虑使用拷贝构造函数或静态工厂方法作为替代方案
  */`,
 
-    go: `package prototype
+    go: `package main
 
 import (
 	"encoding/json"
@@ -919,7 +917,7 @@ func (r *PrototypeRegistry) Remove(key string) {
 
 // ==================== 客户端使用示例 ====================
 
-func ClientCode() {
+func main() {
 	fmt.Println("========== 原型模式演示 ==========")
 	fmt.Println()
 

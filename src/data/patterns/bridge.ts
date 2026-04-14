@@ -753,7 +753,7 @@ class AdvancedRemoteControl extends RemoteControl {
      * 语音控制功能
      */
     public void voiceControl(String command) {
-        System.out.println("语音识别: \"" + command + "\"");
+        System.out.println("语音识别: '" + command + "'");
         if (command.contains("开机")) {
             if (!device.isEnabled()) device.enable();
         } else if (command.contains("关机")) {
